@@ -1,6 +1,9 @@
 # Express + Typescript + Routing controllers starter boilerplate 
-### ~80Mb (dev) 
-
+### ~80Mb (on dev) 
+- first install node-dev to auto restart during dev
+`npm install -g node-dev`
+- then run
+`npm run dev`
 ```js
 import {
   Controller,
