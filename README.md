@@ -1,5 +1,5 @@
-Express + Typescript + Routing controllers (~ 80Mb on Dev)
-you need to install "node-dev" to auto restart
+# Express + Typescript + Routing controllers starter boilerplate 
+### ~80Mb (dev) 
 
 ```js
 import {
