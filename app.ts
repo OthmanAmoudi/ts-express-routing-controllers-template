@@ -1,25 +1,21 @@
 import 'reflect-metadata';
-import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
+import { close, open, port, serverConfig } from './server';
+import hpp from 'hpp';
+import helmet from 'helmet';
 import morgan from 'morgan';
-import chalk from 'chalk';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
 import { createExpressServer } from 'routing-controllers';
-import { UserController } from './controllers/UserController';
 
-dotenv.config();
+const app = createExpressServer(serverConfig);
 
-const port = process.env.PORT;
-const host = process.env.HOST;
-
-const app = createExpressServer({
-  controllers: [UserController],
-});
-
+app.use(hpp());
+// app.use(helmet());
 app.use(morgan('dev'));
+app.use(compression());
+app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.listen(port, () =>
-  console.log(
-    chalk.green(`⚡️⚡️⚡️ Server is running 🚀🚀🚀 at ${host}:${port}`)
-  )
-);
+app.listen(port, open);
+app.on('close', close);
