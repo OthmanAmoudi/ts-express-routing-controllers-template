@@ -15,6 +15,8 @@ import {
   Delete,
   QueryParam,
 } from 'routing-controllers';
+import Container from 'typedi';
+import { ExampleService } from '../services/userService';
 
 export class CreateUserDto {
   @IsEmail()
@@ -37,9 +39,12 @@ export class User {
 
 @JsonController('/users')
 export class UserController {
+  serviceInstance = Container.get(ExampleService);
+
   @Get('')
   getAll(@Body() body: User) {
-    return { msg: 'This action returns all users', user: body };
+    const x = this.serviceInstance.getUsers();
+    return { msg: 'This action returns all users', user: body, users: x };
   }
 
   @Get('/:id')

@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { close, open, port, serverConfig } from './server';
+import { close, open, port, serverConfig } from './src/server';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import morgan from 'morgan';
