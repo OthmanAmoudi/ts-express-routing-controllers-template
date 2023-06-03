@@ -39,8 +39,9 @@ export class User {
 
 @JsonController('/users')
 export class UserController {
-  serviceInstance = Container.get(ExampleService);
-
+  constructor(
+    private serviceInstance: ExampleService = Container.get(ExampleService)
+  ) {}
   @Get('')
   getAll(@Body() body: User) {
     const x = this.serviceInstance.getUsers();
