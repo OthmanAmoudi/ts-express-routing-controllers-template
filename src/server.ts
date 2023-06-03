@@ -9,6 +9,7 @@ const port = process.env.PORT;
 const host = process.env.HOST;
 
 const serverConfig: RoutingControllersOptions = {
+  development: true,
   cors: {
     origin: '*',
     credentials: true,
