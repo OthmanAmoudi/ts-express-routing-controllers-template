@@ -11,7 +11,11 @@ export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
       response.status(error.httpCode).json(error);
       console.log(error);
     }
-    next(JSON.stringify(error.errors[0].constraints));
+    // console.log(error);
+    // next(JSON.stringify(error.errors[0].constraints));
+    if (error.httpCode !== 400) {
+      response.status(500).json(error);
+    }
     next('_err_');
   }
 }

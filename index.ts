@@ -8,18 +8,15 @@ import cookieParser from 'cookie-parser';
 import express, { Application } from 'express';
 import { useExpressServer } from 'routing-controllers';
 import { close, open, port, serverConfig } from './src/server';
+import { initDB } from './src/db';
 
 const app: Application = express();
-
+initDB();
 app.use(hpp());
-app.use(helmet());
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-useExpressServer(app, serverConfig);
-
-app.listen(port, open);
-app.on('close', close);
+useExpressServer(app, serverConfig).listen(port, open).on('close', close);

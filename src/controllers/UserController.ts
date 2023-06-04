@@ -1,6 +1,8 @@
 import {
+  IsAlphanumeric,
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -19,14 +21,18 @@ import Container from 'typedi';
 import { ExampleService } from '../services/userService';
 
 export class CreateUserDto {
+  @IsOptional()
+  name: string;
+
   @IsEmail()
-  public email: string;
+  email: string;
 
   @IsString()
   @IsNotEmpty()
   @MinLength(9)
+  @IsAlphanumeric()
   @MaxLength(32)
-  public password: string;
+  password: string;
 }
 
 export class User {
@@ -42,6 +48,11 @@ export class UserController {
   constructor(
     private serviceInstance: ExampleService = Container.get(ExampleService)
   ) {}
+  @Get('/test')
+  async getData() {
+    const x = await this.serviceInstance.getData();
+    return { data: x };
+  }
   @Get('')
   getAll(@Body() body: User) {
     const x = this.serviceInstance.getUsers();
@@ -50,14 +61,15 @@ export class UserController {
 
   @Get('/:id')
   getOne(@Param('id') id: number, @QueryParam('limit') limit: number) {
-    return 'This action returns user #' + id + ' with limit of ' + limit;
+    return { msg: 'This action returns user #', id: id, limit: limit };
   }
 
   @Post('/')
-  post(@Body() user: CreateUserDto) {
+  async post(@Body() user: CreateUserDto) {
+    const x = await this.serviceInstance.getData();
     return {
       msg: 'User created',
-      your_user: user,
+      your_user: x,
     };
   }
 
