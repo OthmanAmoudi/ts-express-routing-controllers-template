@@ -1,38 +1,14 @@
 import { Service } from 'typedi';
-import { users } from '../db/schema';
-import { db } from '../db';
-import { eq } from 'drizzle-orm';
 import { CreateUserDto } from '../controllers/UserController';
-import { QueryResult } from 'pg';
-import { InferModel } from 'drizzle-orm';
-
-type NewUser = InferModel<typeof users, 'insert'>;
 
 @Service()
 export class UsersRepo {
   async getDatabaseData() {
-    return await db.select().from(users).where(eq(users.id, 4));
+    // return await db.select().from(users).where(eq(users.id, 4));
   }
 
   async insertUserToDB(user: CreateUserDto) {
-    const insertUser = async (user: NewUser) => db.insert(users).values(user);
-    const newUser: NewUser = {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    };
-    await insertUser(newUser);
-
-    // const x = await db
-    //   .insert(users)
-    //   .values({
-    //     name: user.name,
-    //     email: user.email,
-    //     password: user.password,
-    //   })
-    //   .returning();
-    // console.log({ x });
-    return newUser;
+    // return newUser;
   }
 
   getUsersObj() {
