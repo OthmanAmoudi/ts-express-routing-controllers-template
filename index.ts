@@ -8,10 +8,9 @@ import cookieParser from 'cookie-parser';
 import express, { Application } from 'express';
 import { useExpressServer } from 'routing-controllers';
 import { close, open, port, serverConfig } from './src/server';
-import { initDB } from './src/db';
 
 const app: Application = express();
-initDB();
+// TODP: rate limiter
 app.use(hpp());
 app.use(helmet());
 app.use(morgan('dev'));

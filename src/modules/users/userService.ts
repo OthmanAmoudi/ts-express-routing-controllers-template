@@ -1,6 +1,5 @@
 import { Service } from 'typedi';
-import { UsersRepo } from '../repository/userRepo';
-import { CreateUserDto } from '../controllers/UserController';
+import { UsersRepo } from './userRepo';
 
 @Service()
 export class ExampleService {
@@ -10,8 +9,8 @@ export class ExampleService {
     return this.injectedService.getDatabaseData();
   }
 
-  public createUser(user: CreateUserDto) {
-    return this.injectedService.insertUserToDB(user);
+  public createUser(user: any) {
+    // return this.injectedService.insertUserToDB(user);
   }
   public getUsers() {
     return this.injectedService.getUsersObj();

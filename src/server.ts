@@ -2,6 +2,7 @@ import path from 'path';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import { RoutingControllersOptions } from 'routing-controllers';
+import * as glob from 'glob';
 
 dotenv.config();
 
@@ -15,8 +16,10 @@ const serverConfig: RoutingControllersOptions = {
     credentials: true,
   },
   routePrefix: '/api',
-  controllers: [path.join(__dirname + '/controllers/*.ts')],
-  middlewares: [path.join(__dirname + '/middlewares/*.ts')],
+  controllers: glob.sync(
+    path.join(__dirname, '../src/modules/**/*Controller.ts')
+  ),
+  middlewares: glob.sync(path.join(__dirname, '../src/middlewares/*.ts')),
   validation: {
     whitelist: true,
   },

@@ -1,13 +1,4 @@
 import {
-  IsAlphanumeric,
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
-import {
   JsonController,
   Param,
   Body,
@@ -18,43 +9,23 @@ import {
   QueryParam,
 } from 'routing-controllers';
 import Container from 'typedi';
-import { ExampleService } from '../services/userService';
-
-export class CreateUserDto {
-  @IsOptional()
-  name: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(9)
-  @IsAlphanumeric()
-  @MaxLength(32)
-  password: string;
-}
-
-export class User {
-  @IsEmail()
-  email: string;
-
-  @MinLength(6)
-  password: string;
-}
+import { ExampleService } from './userService';
+import { CreateUserDto, UserDto } from '../dtos';
 
 @JsonController('/users')
 export class UserController {
   constructor(
     private serviceInstance: ExampleService = Container.get(ExampleService)
   ) {}
+
   @Get('/test')
   async getData() {
     const x = await this.serviceInstance.getData();
     return { data: x };
   }
+
   @Get('')
-  getAll(@Body() body: User) {
+  getAll(@Body() body: UserDto) {
     const x = this.serviceInstance.getUsers();
     return { msg: 'This action returns all users', user: body, users: x };
   }

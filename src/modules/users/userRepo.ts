@@ -1,13 +1,18 @@
 import { Service } from 'typedi';
-import { CreateUserDto } from '../controllers/UserController';
+import { PrismaClient, User } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 @Service()
 export class UsersRepo {
-  async getDatabaseData() {
+  async getDatabaseData(): Promise<User | null> {
+    const user = await prisma.user.findFirst({ where: { id: 1 } });
+    console.log(user);
+    return user;
     // return await db.select().from(users).where(eq(users.id, 4));
   }
 
-  async insertUserToDB(user: CreateUserDto) {
+  async insertUserToDB() {
     // return newUser;
   }
 
