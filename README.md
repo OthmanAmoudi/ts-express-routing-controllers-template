@@ -1,8 +1,21 @@
-# Express + Typescript + Routing controllers starter boilerplate 
-### ~80Mb (on dev) 
-- first install node-dev to auto restart during dev
+# Express, Typescript, Routing-Controllers, Prisma, REST API starter boilerplate
+- Auth System with JWT
+- Password hash bcrypt
+- Prisma + PostgreSQL
+- Login 
+- Register users
+- Private Routes
+### Things to get started
+- make your .env file as follow: 
+- HOST=http://localhost
+- PORT=3000
+- NODE_ENV=dev
+- DATABASE_URL=postgresql://<DB_USER>:<DB_PASSWORD>@<DB_HOST>:5432/<DB_NAME>
+- TOKEN_SECRET=<generate a random string>
+- JWT_EXP_DAYS=3 
+- then install node-dev to auto restart during dev
 `npm install -g node-dev`
-- then run
+- lastly run
 `npm run dev`
 ```js
 import {
