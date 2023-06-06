@@ -1,5 +1,4 @@
 import {
-  IsAlphanumeric,
   IsEmail,
   IsNotEmpty,
   IsOptional,
@@ -7,13 +6,19 @@ import {
   MaxLength,
   MinLength,
   Validate,
-  isAlphanumeric,
 } from 'class-validator';
 import { IsNumberLetter } from '../../custom/customValidators';
+import { Exclude } from 'class-transformer';
 
 export class CreateUserDto {
   @IsOptional()
   name: string;
+
+  @IsOptional()
+  contact: string;
+
+  @IsOptional()
+  country: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -22,20 +27,33 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(9)
-  @IsAlphanumeric()
+  @Validate(IsNumberLetter)
   @MaxLength(32)
   password: string;
 }
 
-export class UserDto {
-  @MaxLength(32)
+export class LoginUserDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
 
-  @MaxLength(32)
   @MinLength(8)
   @Validate(IsNumberLetter)
   @IsNotEmpty()
   password: string;
+}
+
+export class SendUserDto {
+  name: string;
+  email: string;
+  contact: string;
+  country: string;
+  @Exclude()
+  password: string;
+  @Exclude()
+  id: number;
+  @Exclude()
+  createdAt: Date;
+  @Exclude()
+  updatedAt: Date;
 }

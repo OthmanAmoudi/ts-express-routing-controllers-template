@@ -8,7 +8,11 @@ import {
 export class CustomErrorHandler implements ExpressErrorMiddlewareInterface {
   error(error: any, request: any, response: any, next: (err: any) => any) {
     if (error instanceof HttpError) {
-      response.status(error.httpCode).json(error);
+      if (error.httpCode === 404) {
+        response.status(404).json({ message: 'Page not found' });
+      } else {
+        response.status(error.httpCode).json(error);
+      }
     } else {
       response.status(500).json(error);
     }

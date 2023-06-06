@@ -10,6 +10,7 @@ import { useExpressServer } from 'routing-controllers';
 import { close, open, port, serverConfig } from './src/server';
 
 const app: Application = express();
+
 // TODP: rate limiter
 app.use(hpp());
 app.use(helmet());
@@ -18,4 +19,6 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-useExpressServer(app, serverConfig).listen(port, open).on('close', close);
+useExpressServer(app, serverConfig)
+  .listen(port, open)
+  .on('close' || 'SIGINT', close);

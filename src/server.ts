@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import dotenv from 'dotenv';
 import { RoutingControllersOptions } from 'routing-controllers';
 import * as glob from 'glob';
+import { getCurrentUser } from './modules/auth/authService';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ const serverConfig: RoutingControllersOptions = {
     whitelist: true,
   },
   defaultErrorHandler: false,
+  currentUserChecker: getCurrentUser,
 };
 
 const open = () =>
