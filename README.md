@@ -11,7 +11,7 @@
 - PORT=3000
 - NODE_ENV=dev
 - DATABASE_URL=postgresql://<DB_USER>:<DB_PASSWORD>@<DB_HOST>:5432/<DB_NAME>
-- TOKEN_SECRET=<generate a random string>
+- TOKEN_SECRET=<generate_a_random_string>
 - JWT_EXP_DAYS=3 
 - then install node-dev to auto restart during dev
 `npm install -g node-dev`
